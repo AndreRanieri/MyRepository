@@ -1,0 +1,83 @@
+<h2>Add Computer</h2>
+
+<div class="container mt-3 shadow p-4">
+  <div class="container">
+    <form #validationForm="ngForm" (ngSubmit)="addComputer()">
+      <div class="form-group">
+        <label>Computer Model</label>
+        <input #computerInput="ngModel"
+               id="model" name="model" type="text" class="form-control"
+               [(ngModel)]="computerForm.model" required>
+        <div [hidden]="computerInput.valid" class="alert alert-danger">
+          The model is not valid.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Computer Brand</label> <br>
+        <ng-container *ngFor="let brand of brands">
+          <div>
+            <input type="radio" id="inputRadio-{{ marque }}"
+                   #marqueValidation="ngModel"
+                   name="brand" [value]="brand" required [(ngModel)]="computerForm.brand">
+            <label for="customRadio" class="mx-2">{{ brand }}</label>
+          </div>
+        </ng-container>
+        <div [hidden]="validationForm.controls.brand?.valid" class="alert alert-danger">
+         The brand is necessary.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Computer Type</label> <br>
+        <select #type="ngModel" name="type"
+                [(ngModel)]="computerForm.type"
+                required class="form-control">
+          <option></option>
+          <option *ngFor="let type of types">
+            {{ type }}
+          </option>
+        </select>
+        <div [hidden]="type.valid" class="alert alert-danger">
+          The type is necessary.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Computer Category</label><br>
+        <ng-container *ngFor="let category of categorys">
+          <div>
+            <input type="radio" id="inputRadio-{{ categorie }}"
+                   #categorieValidation="ngModel"
+                   name="category" [value]="category" required [(ngModel)]="computerForm.category">
+            <label for="customRadio" class="mx-2">{{ category }}</label>
+          </div>
+        </ng-container>
+        <div [hidden]="validationForm.controls.category?.valid" class="alert alert-danger">
+         The category is necessary.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Buy Price</label> <br>
+        <input [(ngModel)]="computerForm.buyPrice" name="buyPrice"
+               type="number" class="form-control" required #buyPrice="ngModel">
+        <div [hidden]="buyPrice.valid" class="alert alert-danger">
+          The buy price is necessary.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Sell Price</label> <br>
+        <input [(ngModel)]="computerForm.sellPrice" name="sellPrice"
+               type="number" class="form-control" required #sellPrice="ngModel">
+        <div [hidden]="sellPrice.valid" class="alert alert-danger">
+          The sell price is necessary
+        </div>
+
+      </div>
+      <input id="submitButton" [disabled]="!validationForm.valid" type="submit" class="btn btn-success" value="Valid">
+
+    </form>
+  </div>
+</div>

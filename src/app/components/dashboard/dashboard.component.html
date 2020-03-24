@@ -1,0 +1,39 @@
+<ng-container *ngIf="isLoading">
+  Chargement en cours
+</ng-container>
+
+<ng-container *ngIf="!isLoading">
+  <h1>{{ computers.length }} Ordinateur en stock</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+        <th scope="col">Modèle</th>
+        <th scope="col">Marque</th>
+        <th scope="col">Type</th>
+        <th scope="col">Categorie</th>
+        <th scope="col">date</th>
+        <th scope="col">Prix de vente</th>
+        <th scope="col">Prix d'achat</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let computer of computers">
+      <th scope="row" class="lineChaussure">{{ computer.id }} </th>
+        <td>{{computer.modele}}</td>
+        <td>{{computer.marque}}</td>
+        <td>{{computer.type}}</td>
+        <td>{{computer.categorie}}</td>
+        <td>{{computer.dateEntreeMagasin}}</td>
+        <td>{{computer.prixVente}} €</td>
+        <td>{{computer.prixAchat}} €</td>
+      <td>
+        <a>Voir le détail</a> <br>
+        <a [routerLink]="['/edit', computer.id]">Editer</a> <br>
+        <a class="cursor-pointer">Supprimer</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</ng-container>
